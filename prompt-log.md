@@ -47,5 +47,13 @@
 - สร้าง plan.md ตาม template ของโปรเจกต์ โดยมีหัวข้อ: สรุปแนวทาง, เทคโนโลยีที่ใช้, โมเดลข้อมูล, API / หน้าจอ, ตารางตรวจ Constraints, แผนทดสอบ, ลำดับงาน, สิ่งที่ยังไม่ทำ
 - อ้างอิงทุก Requirement / Constraint / Acceptance Criteria ตาม spec.md ได้ครบถ้วน
 - ระบุ Open Question ที่จำเป็นให้ทีมตอบก่อนเริ่มพัฒนาอย่างละเอียด
+---
 
+## 2569-09-23 09:30 คำสั่ง: /tasks
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์: specs/001-booking/tasks.md
+- ผลลัพธ์: สร้างไฟล์ tasks.md ครบตาม template ที่กำหนด พร้อม traceability ให้ทุก AC และ Constraint มี task ที่ครอบคลุม
+- วิเคราะห์: มี 11 task ทั้งหมด, 2 task ที่สถานะเป็นรอ Q-02 (T-03, T-11) เนื่องจากยังรอคำตอบเรื่องรูปแบบ/รีเซ็ตหมายเลขคิว
+- ข้อสังเกต: Q-01 ถูกย้ายจาก Open Question เป็น requirement ใน FR-BKG-03 แล้ว; Q-02 เป็น Open Question เดียวที่ยังค้างอยู่
 ---
