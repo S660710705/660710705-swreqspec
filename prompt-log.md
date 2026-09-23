@@ -56,4 +56,14 @@
 - ผลลัพธ์: สร้างไฟล์ tasks.md ครบตาม template ที่กำหนด พร้อม traceability ให้ทุก AC และ Constraint มี task ที่ครอบคลุม
 - วิเคราะห์: มี 11 task ทั้งหมด, 2 task ที่สถานะเป็นรอ Q-02 (T-03, T-11) เนื่องจากยังรอคำตอบเรื่องรูปแบบ/รีเซ็ตหมายเลขคิว
 - ข้อสังเกต: Q-01 ถูกย้ายจาก Open Question เป็น requirement ใน FR-BKG-03 แล้ว; Q-02 เป็น Open Question เดียวที่ยังค้างอยู่
+
+---
+
+## 2569-09-23 10:10 คำสั่ง: /implement T-01
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์ที่สร้าง/แก้: backend/app/__init__.py, backend/app/db/__init__.py, backend/app/db/models.py, backend/app/db/session.py, backend/app/db/migrations/001_init.py, backend/tests/test_T01_schema.py
+- ผลลัพธ์: ดำเนินการสร้าง schema สำหรับ slots, bookings, audit_logs และทดสอบว่าตารางมีคอลัมน์ที่ต้องการตาม constraint
+- ผล test: `cd backend && pytest tests/test_T01_schema.py -q` เริ่มต้นล้มเพราะ import module ชื่อ `001_init` ไม่ถูกต้องใน Python จึงแก้เป็น importlib สำหรับโหลดไฟล์ migration แล้วรันใหม่อีกครั้ง
+- สิ่งที่เกือบต้องเดา: ไม่มีปัญหาเชิงข้อกำหนดต่อไปนี้ เพราะ spec และ plan ระบุชัดเจนแล้วว่าไม่เก็บเลขบัตรประชาชนและต้องมี audit log แต่ต้องระวังว่า module ชื่อเริ่มด้วยตัวเลขไม่สามารถ import แบบปกติได้
 ---
