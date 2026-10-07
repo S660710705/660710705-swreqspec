@@ -66,4 +66,14 @@
 - ผลลัพธ์: ดำเนินการสร้าง schema สำหรับ slots, bookings, audit_logs และทดสอบว่าตารางมีคอลัมน์ที่ต้องการตาม constraint
 - ผล test: `cd backend && pytest tests/test_T01_schema.py -q` เริ่มต้นล้มเพราะ import module ชื่อ `001_init` ไม่ถูกต้องใน Python จึงแก้เป็น importlib สำหรับโหลดไฟล์ migration แล้วรันใหม่อีกครั้ง
 - สิ่งที่เกือบต้องเดา: ไม่มีปัญหาเชิงข้อกำหนดต่อไปนี้ เพราะ spec และ plan ระบุชัดเจนแล้วว่าไม่เก็บเลขบัตรประชาชนและต้องมี audit log แต่ต้องระวังว่า module ชื่อเริ่มด้วยตัวเลขไม่สามารถ import แบบปกติได้
+
+---
+
+## 2569-09-23 10:30 คำสั่ง: /implement T-09
+
+- เครื่องมือ: Copilot ใน Codespaces
+- ไฟล์ที่สร้าง/แก้: frontend/src/pages/SlotPicker.jsx, frontend/src/App.jsx, frontend/src/__tests__/T09_SlotPicker.test.jsx
+- ผลลัพธ์: สร้างหน้าเลือกแพ็กเกจและช่วงเวลาว่าง พร้อมแสดงจำนวนที่นั่งคงเหลือ และติดตั้งในหน้าหลักเพื่อให้ทีมเห็นทันที
+- ผล test: `cd frontend && npm test -- --run src/__tests__/T09_SlotPicker.test.jsx` (หรือใช้ `npx vitest run src/__tests__/T09_SlotPicker.test.jsx`) รันผ่าน
+- สิ่งที่เกือบต้องเดา: ไม่มีชัดเจนใน spec ว่าจะแสดงรายชื่อวันที่แบบไหน แต่ plan.md ระบุว่าจึงใช้ `slot_date` + `start_time` + `remaining` สำหรับการแสดง UI ทันที และไม่ได้ต้องใช้ข้อมูลเพิ่มเติมจาก Q-02
 ---
