@@ -6,23 +6,26 @@ const PACKAGES = [
   { code: 'PRE', name: 'ตรวจสุขภาพก่อนเข้าทำงาน' },
 ]
 
-export default function SlotPicker({ api, dateFrom, onNext }) {
+export default function SlotPicker({ api, client, dateFrom, onNext }) {
+  const service = api ?? client
   const [packageCode, setPackageCode] = useState(PACKAGES[0].code)
   const [slots, setSlots] = useState([])
   const [selected, setSelected] = useState(null)
 
   // FR-BKG-06 เปลี่ยนแพ็กเกจแล้วโหลดช่วงเวลาใหม่
   useEffect(() => {
+    if (!service) return
+
     let alive = true
-    api.getSlots({ dateFrom, packageCode })
+    service.getSlots({ dateFrom, packageCode })
       .then((data) => { if (alive) setSlots(data.slots ?? data) })
       .catch(() => { if (alive) setSlots([]) })
     return () => { alive = false }
-  }, [api, dateFrom, packageCode])
+  }, [service, dateFrom, packageCode])
 
   return (
     <section className="mx-auto max-w-md p-4">
-      <h1 className="text-xl font-bold">จองคิวตรวจสุขภาพ</h1>
+      <h1 className="text-xl font-bold">เลือกแพ็กเกจและช่วงเวลา</h1>
       <ol className="mt-2 flex gap-2 text-xs">
         <li className="rounded-full bg-teal-700 px-3 py-1 text-white">1 เลือกเวลา</li>
         <li className="rounded-full bg-slate-100 px-3 py-1">2 ยืนยัน</li>
@@ -38,12 +41,15 @@ export default function SlotPicker({ api, dateFrom, onNext }) {
       <h2 className="mt-4 text-sm text-slate-600">ช่วงเวลาที่ว่าง</h2>
       <ul>
         {slots.map((s) => (
-          <li key={s.id}>
+          <li key={s.id ?? `${s.slot_date}-${s.start_time}`}>
             <button type="button" aria-pressed={selected === s.id}
               className="mt-2 flex w-full justify-between rounded-lg border p-2"
               onClick={() => setSelected(s.id)}>
-              <span>{s.start_time} น.</span>
-              <small>ว่าง {s.remaining}</small>
+              <span>
+                {s.slot_date ? <span>{s.slot_date}</span> : null}
+                {s.slot_date ? <span className="ml-2">เวลา: {s.start_time}</span> : <span>{s.start_time} น.</span>}
+              </span>
+              <small>เหลือ {s.remaining} ที่</small>
             </button>
           </li>
         ))}
