@@ -67,3 +67,13 @@
 - ผลการตรวจ: TC-BKG-01-1 ผ่าน, TC-BKG-01-2 ผ่าน
 - TC-BKG-01-3: ยังไม่เขียน assert เพราะ spec ยังไม่ได้ระบุผลตอบกลับเมื่อผู้รับบริการยังไม่ได้ยืนยันตัวตน
 - ผล test: 3 tests รันผ่านจากไฟล์ backend/tests/test_AC_BKG_01.py; มี warning จาก dependency ของ FastAPI/TestClient
+
+---
+
+## 2569-10-07 08:35 คำสั่ง: /verify specs/001-booking/
+
+- โหมด: ตรวจ requirement
+- ผล test: backend 6 ผ่าน, frontend 2 ผ่าน, รวม 8 ผ่าน; มี warning จาก FastAPI/TestClient
+- จำนวนแถวตามรอยไปข้างหน้า: ครบ 1, ยังไม่ถึง 8, รอ 0, ช่องโหว่ 6
+- ข้อค้นพบใหม่: F-01 ถึง F-12
+- ผล RTM: สร้างไฟล์ specs/001-booking/rtm.md โดยไม่มีการแก้โค้ดหรือ test
